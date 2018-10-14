@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const passport = require("passport");
 
 // Load validation
 const validateProfileInput = require("../../validation/profile");
+const validateGigsInput = require("../../validation/gigs");
 
 // Load profile model
 const Profile = require("../../models/Profile");
@@ -157,6 +157,43 @@ router.post(
         });
       }
     });
+  }
+);
+
+// @route   POST api/profile/gigs
+// @desc    Add gig to profile
+// @access  Private
+router.post(
+  "/gigs",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateGigsInput(req.body);
+
+    // Check validation
+    if (!isValid) {
+      // Return any errors with 400 status
+      return res.status(400).json(errors);
+    }
+
+    Profile.findOne({ user: req.user.id })
+      .then(profile => {
+        const newGig = {
+          title: req.body.title,
+          venue: req.body.venue,
+          location: req.body.location,
+          date: req.body.date,
+          time: req.body.time
+        };
+
+        // Add to gigs array
+        profile.gigs.unshift(newGig);
+
+        profile
+          .save()
+          .then(profile => res.json(profile))
+          .catch(err => res.json(err));
+      })
+      .catch(err => res.json(err));
   }
 );
 
