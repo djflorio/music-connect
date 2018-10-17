@@ -15,7 +15,6 @@ class Landing extends Component {
                   Create a musician profile/portfolio, share posts and get help
                   from other musicians
                 </p>
-                <hr />
                 <Link to="/register" className="btn btn-lg btn-info mr-2">
                   Sign Up
                 </Link>
