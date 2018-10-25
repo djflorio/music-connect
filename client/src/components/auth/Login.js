@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { loginUser } from "../../actions/authActions";
+import { loginUser, updateLoginErrors } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
 
 class Login extends Component {
@@ -18,10 +18,20 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.auth.isAuthenticated) {
+      this.props.history.push("/dashboard");
+    }
+  }
+
   componentDidUpdate() {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push("/dashboard");
     }
+  }
+
+  componentWillUnmount() {
+    this.props.updateLoginErrors({});
   }
 
   onSubmit(e) {
@@ -107,5 +117,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { loginUser }
+  { loginUser, updateLoginErrors }
 )(withRouter(Login));
