@@ -1,4 +1,4 @@
-import { UPDATE_REGISTER_ERRORS } from "../actions/types";
+import { UPDATE_REGISTER_ERRORS, UPDATE_LOGIN_ERRORS } from "../actions/types";
 
 const initialState = {
   register: {},
@@ -11,6 +11,11 @@ const errorsReducer = (state = initialState, action) => {
       return {
         ...state,
         register: action.payload
+      };
+    case UPDATE_LOGIN_ERRORS:
+      return {
+        ...state,
+        login: action.payload
       };
     default:
       return state;

@@ -35,12 +35,12 @@ export const loginUser = userData => {
         // Set current user
         dispatch(setCurrentUser(decoded));
       })
-      .catch(err =>
+      .catch(err => {
         dispatch({
           type: UPDATE_LOGIN_ERRORS,
           payload: err.response.data
-        })
-      );
+        });
+      });
   };
 };
 
