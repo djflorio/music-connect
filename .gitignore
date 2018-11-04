@@ -5,6 +5,7 @@ keys.js
 package-lock.json
 coverage/
 .env.local
+.vscode/
 .env.development.local
 .env.test.local
 .env.production.local

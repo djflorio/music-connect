@@ -1,8 +1,9 @@
-import { UPDATE_REGISTER_ERRORS, UPDATE_LOGIN_ERRORS } from "../actions/types";
+import { UPDATE_REGISTER_ERRORS, UPDATE_LOGIN_ERRORS } from '../actions/types';
 
 const initialState = {
   register: {},
-  login: {}
+  login: {},
+  profile: {}
 };
 
 const errorsReducer = (state = initialState, action) => {
