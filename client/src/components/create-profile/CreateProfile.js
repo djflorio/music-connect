@@ -5,6 +5,8 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
+import { createProfile } from '../../actions/profileActions';
+import { withRouter } from 'react-router-dom';
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -23,8 +25,7 @@ class CreateProfile extends Component {
       facebook: '',
       bandcamp: '',
       youtube: '',
-      instagram: '',
-      errors: {}
+      instagram: ''
     };
 
     this.onChange = this.onChange.bind(this);
@@ -34,7 +35,21 @@ class CreateProfile extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    console.log('submit');
+    const profileData = {
+      handle: this.state.handle,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      skills: this.state.skills,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      youtube: this.state.youtube,
+      instagram: this.state.instagram
+    };
+
+    this.props.createProfile(profileData, this.props.history);
   }
 
   onChange(e) {
@@ -44,7 +59,8 @@ class CreateProfile extends Component {
   }
 
   render() {
-    const { errors, displaySocialInputs } = this.state;
+    const { displaySocialInputs } = this.state;
+    const { errors } = this.props;
 
     let socialInputs;
 
@@ -148,20 +164,12 @@ class CreateProfile extends Component {
                   info="City, State"
                 />
                 <TextFieldGroup
-                  placeholder="Skills"
+                  placeholder="* Skills"
                   name="skills"
                   value={this.state.skills}
                   onChange={this.onChange}
                   error={errors.skills}
                   info="A comma-separated list of musical skills"
-                />
-                <TextFieldGroup
-                  placeholder="* Profile Handle"
-                  name="handle"
-                  value={this.state.handle}
-                  onChange={this.onChange}
-                  error={errors.handle}
-                  info="A unique handle for your profile URL."
                 />
                 <TextAreaFieldGroup
                   placeholder="Short Bio"
@@ -174,6 +182,7 @@ class CreateProfile extends Component {
 
                 <div className="mb-3">
                   <button
+                    type="button"
                     onClick={() => {
                       this.setState(prevState => ({
                         displaySocialInputs: !prevState.displaySocialInputs
@@ -208,8 +217,11 @@ CreateProfile.propTypes = {
 function mapStateToProps(state) {
   return {
     profile: state.profile,
-    errors: state.errors.profile
+    errors: state.errors.createProfile
   };
 }
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(
+  mapStateToProps,
+  { createProfile }
+)(withRouter(CreateProfile));

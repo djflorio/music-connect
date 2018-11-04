@@ -1,9 +1,13 @@
-import { UPDATE_REGISTER_ERRORS, UPDATE_LOGIN_ERRORS } from '../actions/types';
+import {
+  UPDATE_REGISTER_ERRORS,
+  UPDATE_LOGIN_ERRORS,
+  UPDATE_CREATE_PROFILE_ERRORS
+} from '../actions/types';
 
 const initialState = {
   register: {},
   login: {},
-  profile: {}
+  createProfile: {}
 };
 
 const errorsReducer = (state = initialState, action) => {
@@ -17,6 +21,11 @@ const errorsReducer = (state = initialState, action) => {
       return {
         ...state,
         login: action.payload
+      };
+    case UPDATE_CREATE_PROFILE_ERRORS:
+      return {
+        ...state,
+        createProfile: action.payload
       };
     default:
       return state;
