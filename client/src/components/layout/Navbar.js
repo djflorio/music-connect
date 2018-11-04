@@ -1,21 +1,15 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
-import { clearCurrentProfile } from "../../actions/profileActions";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
+import { clearCurrentProfile } from '../../actions/profileActions';
 
 class Navbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
     this.props.logoutUser();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.auth.isAuthenticated && !this.props.auth.isAuthenticated) {
-      this.props.history.push("/login");
-    }
   }
 
   render() {
@@ -26,7 +20,7 @@ class Navbar extends Component {
         <li className="nav-item">
           <span
             className="nav-link"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
             onClick={this.onLogoutClick.bind(this)}
           >
             <img
@@ -36,9 +30,9 @@ class Navbar extends Component {
               style={{
                 width: 25,
                 marginRight: 5,
-                borderRadius: "50%"
+                borderRadius: '50%'
               }}
-            />{" "}
+            />{' '}
             Logout
           </span>
         </li>
