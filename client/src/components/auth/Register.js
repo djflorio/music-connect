@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { registerUser, updateRegisterErrors } from "../../actions/authActions";
-import TextFieldGroup from "../common/TextFieldGroup";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { registerUser, updateRegisterErrors } from '../../actions/authActions';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class Register extends Component {
   constructor() {
     super();
 
     this.state = {
-      name: "",
-      email: "",
-      password: "",
-      password2: "",
+      name: '',
+      email: '',
+      password: '',
+      password2: '',
       errors: {}
     };
 
@@ -23,7 +23,7 @@ class Register extends Component {
 
   componentDidMount() {
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push('/dashboard');
     }
   }
 
@@ -63,7 +63,7 @@ class Register extends Component {
               </p>
               <form noValidate onSubmit={this.onSubmit}>
                 <TextFieldGroup
-                  name="email"
+                  name="name"
                   value={this.state.name}
                   placeholder="Name"
                   onChange={this.updateFormState}
