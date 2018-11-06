@@ -1,7 +1,8 @@
 import {
   UPDATE_REGISTER_ERRORS,
   UPDATE_LOGIN_ERRORS,
-  UPDATE_CREATE_PROFILE_ERRORS
+  UPDATE_CREATE_PROFILE_ERRORS,
+  UPDATE_DELETE_ACCOUNT_ERRORS
 } from '../actions/types';
 
 const initialState = {
@@ -26,6 +27,11 @@ const errorsReducer = (state = initialState, action) => {
       return {
         ...state,
         createProfile: action.payload
+      };
+    case UPDATE_DELETE_ACCOUNT_ERRORS:
+      return {
+        ...state,
+        deleteAccount: action.payload
       };
     default:
       return state;
